@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Adding food Items</title>
+
+<link rel="stylesheet" type="text/css" href="fooditemspage.css" media="screen"/>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script>
+
+    $(document).ready(function(){
+        $('.open-form').click(function(){
+  
+  $('.form').css('display','block')
+  $(this).addClass('open');
+
+});
+$('.close-form').click(function(){
+
+  $('.form').css('display','none')
+  $(this).removeClass('open');
+ 
+
+});
+        $(".add-row").click(function(){
+            var id = $("#itemid").val();
+            var name = $("#itemname").val();
+            var price=$("#itemprice").val();
+            var status='<label class="switch" id="toggle">'+
+        '<input type="checkbox" checked>'+
+        '<span class="slider round"></span>'+
+    '</label>';
+            var markup = "<tr><td><input type='checkbox' name='record'></td><td>" + id + "</td><td>" + name +  "</td><td>"+ price+ 
+                "</td><td>"+status+ "</td></tr>";
+            $("table tbody").append(markup);
+            resetForm();
+            $('.form').css('display','none')
+  $(this).removeClass('open');
+            
+        });
+        function resetForm() {
+        document.getElementById("itemsform").reset();
+        }
+        // Find and remove selected table rows
+        $(".delete-row").click(function(){
+            $("table tbody").find('input[name="record"]').each(function(){
+            	if($(this).is(":checked")){
+                    $(this).parents("tr").remove();
+                }
+            });
+        });
+    });    
+  
+</script>
+</head>
+<body>
+    <div class="container">
+        <header><h1 class="sitename">VNR CANTEEN</h1></header>
+        <nav>
+            <button class="FoodItemsbtn">Food Items</button>
+            <button class="FoodItemsbtn">Orders</button>
+
+        </nav>
+        <section>
+            
+                <button class="open-form"><b>Add</b></button>
+                
+                <button class="delete-row"><b>Delete</b></button>
+
+                <br>
+                <form id="itemsform" class="form">
+                    <input type="text" id="itemid" placeholder="Item Id" required>
+                    <input type="text" id="itemname" placeholder="Item name" required>
+                    <input type="text" id="itemprice" placeholder="Item price" required>
+                    <input type="button" class="add-row"  value="Add">
+                    <input type="button" class="close-form"value="Cancel">
+                </form>
+            
+           
+            <br>
+            <br>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Select</th>
+                        <th>Item id</th>
+                        <th>Item Name</th>
+                        <th>Price</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        
+                    </tr>
+                </tbody>
+            </table>
+        </section> 
+        
+    </div>
+</body> 
+</html>
